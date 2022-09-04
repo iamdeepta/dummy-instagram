@@ -10,6 +10,12 @@ const Body = () => {
         <div className="body_left">
           <Story />
           <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
         </div>
         <div className="body_right"></div>
       </div>
