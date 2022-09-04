@@ -4,6 +4,9 @@
     align-items: center;
     padding: 0.6rem 18rem;
     border-bottom: 0.01px solid rgb(216, 216, 216);
+    position: sticky;
+    top: 0;
+    background: white;
 
     .header_left{
         img{
