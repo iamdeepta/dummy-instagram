@@ -1,0 +1,14 @@
+.body{
+    padding: 1.2rem 22rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    .body_left{
+        flex-basis: 55%;
+    }
+
+    .body_right{
+        flex-basis: 45%;
+    }
+}
