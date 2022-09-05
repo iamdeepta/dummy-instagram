@@ -53,6 +53,10 @@
                 .post_body_like_icon{
                     font-size: 1.6rem;
                     cursor: pointer;
+
+                    &.fill_heart{
+                        color: red;
+                    }
                 }
             }
 

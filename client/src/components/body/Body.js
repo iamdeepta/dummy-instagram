@@ -8,6 +8,8 @@ import api from "../../api/baseurl";
 const Body = () => {
   const [suggestions, setSuggestions] = useState([]);
 
+  const [posts, setPosts] = useState([]);
+
   //retrieve user suggestions
   const getUsers = async () => {
     const response = await api.get("user_suggestions");
@@ -26,18 +28,33 @@ const Body = () => {
     getAllUsers();
   }, []);
 
+  //retrieve posts
+  const getPosts = async () => {
+    const response = await api.get("posts");
+    return response.data;
+  };
+
+  useEffect(() => {
+    const getAllPosts = async () => {
+      const allposts = await getPosts();
+
+      if (allposts) {
+        setPosts(allposts);
+      }
+    };
+
+    getAllPosts();
+  }, []);
+
   return (
     <>
       <div className="body">
         <div className="body_left">
           <Story />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
-          <Post />
+
+          {posts.map((post) => {
+            return <Post post={post} key={post.id} />;
+          })}
         </div>
         <div className="body_right">
           <div className="body_right_profile">

@@ -7,24 +7,37 @@ import { FiSend, FiSmile } from "react-icons/fi";
 import { RiBookmarkLine } from "react-icons/ri";
 import PostComment from "./PostComment";
 
-const Post = () => {
+const Post = ({ post }) => {
+  let today_date = new Date().getTime();
+
+  let day_diff = (today_date - Number(post.posted_on)) / (1000 * 3600 * 24);
+
   return (
     <>
       <div className="post">
         <div className="post_header">
           <div className="post_header_left">
-            <img src="https://picsum.photos/200/300?random=67" alt="user" />
-            <p>deepikapadukone</p>
+            <img src={post.user.profile_picture} alt="user" />
+            <p>{post.user.username}</p>
           </div>
           <FiMoreHorizontal className="post_header_right_icon" />
         </div>
 
         <div className="post_body">
-          <img src="https://picsum.photos/200/300?random=60" alt="post" />
+          <img src={post.image} alt="post" />
 
           <div className="post_body_likes">
             <div className="post_body_likes_left">
-              <AiOutlineHeart className="post_body_like_icon" />
+              {post.liked ? (
+                <>
+                  <AiFillHeart className="post_body_like_icon fill_heart" />
+                </>
+              ) : (
+                <>
+                  <AiOutlineHeart className="post_body_like_icon" />
+                </>
+              )}
+
               <FaRegComment className="post_body_like_icon" />
               <FiSend className="post_body_like_icon" />
             </div>
@@ -34,15 +47,29 @@ const Post = () => {
           </div>
 
           <div className="post_body_contents">
-            <h6>1200 likes</h6>
+            <h6>{post.likes} likes</h6>
             <h4>
-              deepikapadukone{" "}
-              <span>Surprise hey there I am deepika padukone</span>
+              {post.user.username}
+              <span>{post.text}</span>
             </h4>
-            <PostComment name={"radhidevlukia"} comment={"Can't wait!"} />
-            <PostComment name={"tarekfaiyaz"} comment={"This is amazing!"} />
 
-            <p className="post_body_time">2 DAYS AGO</p>
+            {post.comments.map((comment) => {
+              return (
+                <PostComment
+                  name={comment.user.username}
+                  comment={comment.text}
+                  key={comment.id}
+                />
+              );
+            })}
+
+            <p className="post_body_time">
+              {day_diff < 1
+                ? Math.round(day_diff * 24) === 0
+                  ? `${Math.round(day_diff * 24 * 60)} MINUTES AGO`
+                  : `${Math.round(day_diff * 24)} HOURS AGO`
+                : `${Math.round(day_diff)} DAYS AGO`}
+            </p>
           </div>
 
           <div className="post_body_input">
