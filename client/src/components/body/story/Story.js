@@ -1,31 +1,41 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Story.scss";
 import StoryItem from "./StoryItem";
+import api from "../../../api/baseurl";
 
 const Story = () => {
+  const [story, setStory] = useState([]);
+
+  //retrieve stories
+  const getUsers = async () => {
+    const response = await api.get("stories");
+    return response.data;
+  };
+
+  useEffect(() => {
+    const getAllUsers = async () => {
+      const allusers = await getUsers();
+
+      if (allusers) {
+        setStory(allusers);
+      }
+    };
+
+    getAllUsers();
+  }, []);
+
   return (
     <>
       <div className="story">
-        <StoryItem
-          img={"https://picsum.photos/200/300?random=60"}
-          name={"rahuldholakia"}
-        />
-        <StoryItem
-          img={"https://picsum.photos/200/300?random=61"}
-          name={"nehadhupia"}
-        />
-        <StoryItem
-          img={"https://picsum.photos/200/300?random=62"}
-          name={"shahrukhkhan"}
-        />
-        <StoryItem
-          img={"https://picsum.photos/200/300?random=63"}
-          name={"salmankhan"}
-        />
-        <StoryItem
-          img={"https://picsum.photos/200/300?random=64"}
-          name={"hritthikroshan"}
-        />
+        {story.map((stories) => {
+          return (
+            <StoryItem
+              img={stories.profile_picture}
+              name={stories.username}
+              key={stories.username}
+            />
+          );
+        })}
       </div>
     </>
   );
