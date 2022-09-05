@@ -4,11 +4,14 @@ import Post from "./post/Post";
 import Story from "./story/Story";
 import Suggestion from "./suggestion/Suggestion";
 import api from "../../api/baseurl";
+import { useGetCurrentUser } from "../../hooks/useGetCurrentUser";
 
 const Body = () => {
   const [suggestions, setSuggestions] = useState([]);
 
   const [posts, setPosts] = useState([]);
+
+  const { user, getCurrentUser } = useGetCurrentUser();
 
   //retrieve user suggestions
   const getUsers = async () => {
@@ -46,6 +49,11 @@ const Body = () => {
     getAllPosts();
   }, []);
 
+  //get current user
+  useEffect(() => {
+    getCurrentUser();
+  }, [getCurrentUser]);
+
   return (
     <>
       <div className="body">
@@ -59,10 +67,10 @@ const Body = () => {
         <div className="body_right">
           <div className="body_right_profile">
             <div className="body_right_profile_image">
-              <img src="https://picsum.photos/200/300?random=1" alt="profile" />
+              <img src={user.profile_picture} alt="profile" />
               <div className="body_right_profile_name">
-                <h6>deepta</h6>
-                <p>Deepta</p>
+                <h6>{user.username}</h6>
+                <p>{user.name}</p>
               </div>
             </div>
             <p>Switch</p>
