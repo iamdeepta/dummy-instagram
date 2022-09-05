@@ -1,3 +1,4 @@
+@import 'src/breakpoints';
 .header{
     display: flex;
     justify-content: space-between;
@@ -8,9 +9,21 @@
     top: 0;
     background: white;
 
+    @include md{       
+        padding: 0.6rem 2rem;
+    }
+
+    @include sm{
+        padding: 0.4rem 1rem;
+    }
+
     .header_left{
         img{
             width: 7.5rem;
+
+            @include sm{
+                width: 6rem;
+            }
         }
     }
 
@@ -24,6 +37,10 @@
             background: rgb(236, 236, 236);
             font-size: 1rem;
             border-radius: 0.5rem;
+
+            @include sm{
+                display: none;
+            }
         }
 
         .header_middle_search_icon{
@@ -32,6 +49,14 @@
             left: 1rem;
             color: darkgray;
             font-size: 1.2rem;
+
+            @include sm{
+                color: black;
+                font-size: 1.4rem;
+                position: relative;
+                left: 0;
+                top: 0;
+            }
         }
     }
 
@@ -41,9 +66,18 @@
         align-items: center;
         gap: 1.1rem;
 
+        @include sm{
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
         .header_right_icon{
             font-size: 1.8rem;
             cursor: pointer;
+
+            @include sm{
+                font-size: 1.4rem;
+            }
         }
 
         img{

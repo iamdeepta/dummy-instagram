@@ -1,8 +1,13 @@
+@import 'src/breakpoints';
 .body{
     padding: 1.2rem 22rem;
     display: flex;
     justify-content: center;
     align-items: flex-start;
+
+    @include md{
+        padding: 1.2rem 2rem;
+    }
 
     .body_left{
         flex-basis: 55%;
