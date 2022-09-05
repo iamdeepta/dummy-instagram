@@ -1,8 +1,14 @@
+@import 'src/breakpoints';
 .suggestion{
     margin-top: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @include sm{
+        flex-direction: column;
+        gap: 0.3rem;
+    }
 
     .suggestion_left{
         display: flex;

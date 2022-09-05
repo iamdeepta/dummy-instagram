@@ -81,11 +81,16 @@ const Body = () => {
               <h6>Suggestions For You</h6>
               <p>See All</p>
             </div>
-            {suggestions.map((suggestion) => {
-              return (
-                <Suggestion key={suggestion.username} suggestion={suggestion} />
-              );
-            })}
+            <div className="body_right_people_body">
+              {suggestions.map((suggestion) => {
+                return (
+                  <Suggestion
+                    key={suggestion.username}
+                    suggestion={suggestion}
+                  />
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

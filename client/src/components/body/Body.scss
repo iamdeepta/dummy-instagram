@@ -9,18 +9,35 @@
         padding: 1.2rem 2rem;
     }
 
+    @include sm{
+        flex-direction: column;
+        padding: 1rem 1rem;
+    }
+
     .body_left{
         flex-basis: 55%;
+
+        @include sm{
+            flex-basis: 100%;
+        }
     }
 
     .body_right{
         flex-basis: 45%;
         padding: 1rem 2rem;
 
+        @include sm{
+            width: 100%;
+            order: -1;
+            padding: 0rem;
+        }
+
         .body_right_profile{
             display: flex;
             justify-content: space-between;
             align-items: center;
+
+    
 
             .body_right_profile_image{
                 display: flex;
@@ -73,6 +90,16 @@
                     font-size: 0.8rem;
                     cursor: pointer;
                     font-weight: bold;
+                }
+            }
+
+            .body_right_people_body{
+                @include sm{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    gap: 1.2rem;
+                    overflow-x: scroll;
                 }
             }
         }
