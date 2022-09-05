@@ -1,10 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Body.scss";
 import Post from "./post/Post";
 import Story from "./story/Story";
 import Suggestion from "./suggestion/Suggestion";
+import api from "../../api/baseurl";
 
 const Body = () => {
+  const [suggestions, setSuggestions] = useState([]);
+
+  //retrieve user suggestions
+  const getUsers = async () => {
+    const response = await api.get("user_suggestions");
+    return response.data;
+  };
+
+  useEffect(() => {
+    const getAllUsers = async () => {
+      const allusers = await getUsers();
+
+      if (allusers) {
+        setSuggestions(allusers);
+      }
+    };
+
+    getAllUsers();
+  }, []);
+
   return (
     <>
       <div className="body">
@@ -35,8 +56,11 @@ const Body = () => {
               <h6>Suggestions For You</h6>
               <p>See All</p>
             </div>
-
-            <Suggestion />
+            {suggestions.map((suggestion) => {
+              return (
+                <Suggestion key={suggestion.username} suggestion={suggestion} />
+              );
+            })}
           </div>
         </div>
       </div>

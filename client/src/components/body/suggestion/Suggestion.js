@@ -1,13 +1,13 @@
 import React from "react";
 import "./Suggestion.scss";
 
-const Suggestion = () => {
+const Suggestion = ({ suggestion }) => {
   return (
     <>
       <div className="suggestion">
         <div className="suggestion_left">
-          <img src="https://picsum.photos/200/300?random=90" alt="people" />
-          <p>anannyapandey</p>
+          <img src={suggestion.profile_picture} alt="people" />
+          <p>{suggestion.username}</p>
         </div>
         <p>Follow</p>
       </div>
